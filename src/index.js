@@ -5,10 +5,26 @@ import reportWebVitals from './reportWebVitals';
 
 import { createRoot } from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
+import {UserProvider} from "./contexts/user.context";
+import {ProductsProvider} from "./contexts/products.context";
+import {CartProvider} from "./contexts/cart.context";
 
 const container = document.getElementById('root');
 const root = createRoot(container);
-root.render(<BrowserRouter><App/></BrowserRouter>);
+root.render(
+    <BrowserRouter>
+        <UserProvider>
+            <ProductsProvider>
+                <CartProvider>
+                    <App/>
+                </CartProvider>
+            </ProductsProvider>
+        </UserProvider>
+    </BrowserRouter>
+);
+//any of the components inside user provider will have access to user context
+//products provider will have access to user data
+
 // <BrowserRouter/>
 // ReactDOM.render(
 //   <React.StrictMode>
