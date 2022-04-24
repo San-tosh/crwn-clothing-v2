@@ -1,21 +1,15 @@
-import {useContext, useEffect} from "react";
-import {ProductsContext} from "../../contexts/products.context";
-import ProductCard from "../product-card/product-card.component";
+import {Routes, Route} from "react-router-dom";
 import './shop.styles.scss'
+import CategoriesPreview from "../categories-preview/categories-preview.component";
+import Category from "../category/category.component";
 
-const Shop = ()=>{
-    const {products} = useContext(ProductsContext); // returns object {Products:array}
-    useEffect(()=>{
-
-    },[])
+const Shop = () => {
     return (
-        <div className='products-container'>
-            {
-                products.map((product) => (
-                    <ProductCard key={product.id} product={product}/>
-                ))
-            }
-        </div>
+        //nested routes inside shop
+        <Routes>
+            <Route index element={<CategoriesPreview/>}/>
+            <Route path=':category' element={<Category/>}/>
+        </Routes>
     )
 }
 
