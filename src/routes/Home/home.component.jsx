@@ -30,7 +30,7 @@ const Home = () => {
     ]
 
     return (
-        <Directories categories={categories}/>
+        <Directories/>
     ) ;
 }
 
