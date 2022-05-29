@@ -1,16 +1,19 @@
 import './category.style.scss'
 import {useParams} from "react-router-dom";
-import {Fragment, useContext, useEffect, useState} from "react";
-import {CategoriesContext} from "../../contexts/categories.context";
+import {Fragment, useEffect, useState} from "react";
 import ProductCard from "../product-card/product-card.component";
+import {useSelector} from "react-redux";
+import {selectCategoriesMap} from "../../features/categories/categories.selector";
 
 const Category = ()=> {
     const { category } = useParams();
-    const {categoriesMap} = useContext(CategoriesContext); // returns object
+    console.log('category render/re-render');
+    const categoriesMap = useSelector(selectCategoriesMap); // returns object
     const [products, setProducts] = useState(categoriesMap[category]);
 
     useEffect(()=>{
         setProducts(categoriesMap[category]);
+        console.log('useEffect setProducts')
     },[category, categoriesMap]); // calls whenever a category or directories map changes
 
 

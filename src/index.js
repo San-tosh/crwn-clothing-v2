@@ -5,22 +5,20 @@ import reportWebVitals from './reportWebVitals';
 
 import { createRoot } from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
-import {UserProvider} from "./contexts/user.context";
-import {CategoriesProvider} from "./contexts/categories.context";
 import {CartProvider} from "./contexts/cart.context";
+import {Provider} from "react-redux";
+import store from "./store/store";
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-    <BrowserRouter>
-        <UserProvider>
-            <CategoriesProvider>
-                <CartProvider>
-                    <App/>
-                </CartProvider>
-            </CategoriesProvider>
-        </UserProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+                    {/*<CartProvider>*/}
+                        <App/>
+                    {/*</CartProvider>*/}
+        </BrowserRouter>
+    </Provider>
 );
 //any of the components inside user provider will have access to user context
 //products provider will have access to user data

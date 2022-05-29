@@ -41,14 +41,14 @@ export const UserProvider =  ({children}) => {
 
     const value = { currentUser, setCurrentUser};
 
-    useEffect(()=>{
-        return onAuthStateChangedListener((user)=> { // this listener called everytime auth changed
-            if(user) {
-                createUserDocumentFromAuth(user)
-            }
-            setCurrentUser(user);
-        })
-    },[]);
+    // useEffect(()=>{
+    //     return onAuthStateChangedListener((user)=> { // this listener called everytime auth changed
+    //         if(user) {
+    //             createUserDocumentFromAuth(user)
+    //         }
+    //         setCurrentUser(user);
+    //     })
+    // },[]);
 
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
