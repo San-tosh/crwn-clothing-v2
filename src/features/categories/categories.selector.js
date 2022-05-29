@@ -10,6 +10,7 @@
 // creating a memoized selector
 
 import {createSelector} from "reselect";
+// import {categoriesSlice} from "./categoriesSlice";
 
 const selectCategoryReducer = (state) => state.categories;
 
@@ -26,5 +27,10 @@ export const selectCategoriesMap = createSelector(
         acc[title.toLowerCase()] = items;
         return acc;
         },{})
+)
+
+export const selectIsCategoriesLoading = createSelector(
+    [selectCategoryReducer],
+    (categoriesSlice) => categoriesSlice.isLoading
 )
 

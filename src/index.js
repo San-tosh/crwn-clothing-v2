@@ -5,19 +5,19 @@ import reportWebVitals from './reportWebVitals';
 
 import { createRoot } from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
-import {CartProvider} from "./contexts/cart.context";
 import {Provider} from "react-redux";
-import store from "./store/store";
+import store, {persistor} from "./store/store";
+import {PersistGate} from "redux-persist/integration/react";
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
     <Provider store={store}>
-        <BrowserRouter>
-                    {/*<CartProvider>*/}
-                        <App/>
-                    {/*</CartProvider>*/}
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter>
+                            <App/>
+            </BrowserRouter>
+        </PersistGate>
     </Provider>
 );
 //any of the components inside user provider will have access to user context

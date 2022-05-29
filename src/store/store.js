@@ -1,9 +1,10 @@
 import { configureStore} from "@reduxjs/toolkit";
 // import {logger} from "redux-logger";
-import userReducer from "../features/user/userSlice";
-import categoriesReducer from "../features/categories/categoriesSlice";
-import cartReducer from "../features/cart/cartSlice";
 
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import {rootReducer} from "./root-reducer"; // defaults to localStorage for web
+import thunkMiddleware from 'redux-thunk'
 // const middlewares = [logger];
 // const composedEnhancers = compose(applyMiddleware(...middlewares));
 //currying is function that returns another function
@@ -19,14 +20,24 @@ const loggerMiddleware = (store) => (next) => (action) => {
     next(action); // it is synchronous which is passed to its subsequent middlewares and reducers
     console.log('next state: ', store.getState()); // it gets new state
 }
-export default configureStore({
-    reducer: {
-        user: userReducer,
-        categories: categoriesReducer,
-        cart: cartReducer
-    },
-    middleware: [loggerMiddleware],
+
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['cart'] // it comes from authenticaiton to listener so not to conflict each other we blacklisted use
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+const middleWares = [process.env.NODE_ENV !== 'production' && loggerMiddleware, thunkMiddleware].filter(Boolean); //if false return empty
+
+const store =  configureStore({
+    reducer: persistedReducer,
+    middleware: middleWares,
     devTools: process.env.NODE_ENV !== 'production',
     // undefined,
     // composedEnhancers
 })
+
+export default store
+
+export const persistor = persistStore(store)
