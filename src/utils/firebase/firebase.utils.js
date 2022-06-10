@@ -103,3 +103,16 @@ export const signOutUser = async () => await signOut(auth);
 
 // call back parameter is called whenever the auth changed
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, (callback));
+
+export const getCurrentUser = () => { // promisify version if user auth exist or not //if exist pass to get snapshot
+    return new Promise((resolve,reject) => {
+        const unsubscribe = onAuthStateChanged(
+            auth,
+            (userAuth) => { //we resolve and unsubscribe the listener when we get the value anyway
+                unsubscribe();
+                resolve(userAuth);
+            },
+            reject
+        )
+    })
+}

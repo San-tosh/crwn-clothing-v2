@@ -5,22 +5,13 @@ import Authentication from "./routes/authentication/authentication.component";
 import Shop from "./components/shop/shop.component";
 import Checkout from "./components/checkout/checkout.component";
 import {useEffect} from "react";
-import {
-    createUserDocumentFromAuth,
-    onAuthStateChangedListener
-} from "./utils/firebase/firebase.utils";
 import {useDispatch} from "react-redux";
-import {setCurrentUser} from "./features/user/userSlice";
+import {checkUserSession} from "./features/user/user.action";
 
 const App = () => {
     const dispatch = useDispatch()
     useEffect(()=>{
-        return onAuthStateChangedListener((user)=> { // this listener called everytime auth changed
-            if(user) {
-                createUserDocumentFromAuth(user)
-            }
-           dispatch(setCurrentUser(user));
-        })
+        dispatch(checkUserSession())
     },[]);
 
 
