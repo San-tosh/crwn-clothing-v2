@@ -26,7 +26,7 @@ const CartDropdown = () => {
                     ))): <EmptyMessage>Your cart is empty</EmptyMessage>)
                 }
             </CartItems>
-            <Button onClick={goToCheckoutHandler}>GO TO CHECK OUT</Button>
+            <Button onClick={goToCheckoutHandler}>CHECK OUT</Button>
         </CartDropDownContainer>
     )
 }
