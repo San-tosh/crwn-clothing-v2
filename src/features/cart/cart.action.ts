@@ -1,4 +1,7 @@
-export const addCartItem = (cartItems, productToAdd) => {
+import {CartItem} from "./cart.types";
+import {CategoryItem} from "../categories/categories.types";
+
+export const addCartItem = (cartItems: CartItem[], productToAdd: CategoryItem) : CartItem[] => {
     // return if product to add exist in cartItems
     const existingCartItem = cartItems.find((cartItem)=> {
         return cartItem.id === productToAdd.id
@@ -12,13 +15,13 @@ export const addCartItem = (cartItems, productToAdd) => {
     return [...cartItems,{...productToAdd, quantity: 1}]
 }
 
-export const removeCartItem = (cartItems, cartItemToRemove) => {
+export const removeCartItem = (cartItems : CartItem[], cartItemToRemove: CategoryItem) : CartItem[] => {
     // return if product to add exist in cartItems
-    const existingCartItem = cartItems.find((cartItem)=> {
+    const existingCartItem = cartItems.find((cartItem) : Boolean => {
         return cartItem.id === cartItemToRemove.id
     });
 
-    if (existingCartItem.quantity === 1) {
+    if (existingCartItem && existingCartItem.quantity === 1) {
         return cartItems.filter(item => item.id !== cartItemToRemove.id)
     }
     // decrement quantity
@@ -27,8 +30,8 @@ export const removeCartItem = (cartItems, cartItemToRemove) => {
     })
 }
 
-export const removeItemFromCart = (cartItems, cartItemToRemove) => {
-    const newCartItems = removeCartItem(cartItems,cartItemToRemove);
-    // dispatch(setCartItems(newCartItems));
-}
+// export const removeItemFromCart = (cartItems, cartItemToRemove) => {
+//     const newCartItems = removeCartItem(cartItems,cartItemToRemove);
+//     // dispatch(setCartItems(newCartItems));
+// }
 

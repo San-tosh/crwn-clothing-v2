@@ -10,9 +10,12 @@
 // creating a memoized selector
 
 import {createSelector} from "reselect";
+import {CategoriesState} from "./categoriesSlice";
+import {CategoryMap} from "./categories.types";
+import {RootState} from "../../store/store";
 // import {categoriesSlice} from "./categoriesSlice";
 
-const selectCategoryReducer = (state) => state.categories;
+const selectCategoryReducer = (state: RootState) : CategoriesState => state.categories;
 
 export const selectCategories = createSelector(
     [selectCategoryReducer], // create selector api accepts one or more input selectors that extracts the values
@@ -22,11 +25,11 @@ export const selectCategories = createSelector(
 
 export const selectCategoriesMap = createSelector(
     [selectCategories], // unless the categories array is changed do not re run the reduce the method
-    (categories) => categories.reduce((acc, category) => {
+    (categories) : CategoryMap => categories.reduce((acc, category) => {
         const {title, items} = category
         acc[title.toLowerCase()] = items;
         return acc;
-        },{})
+        },{} as CategoryMap)
 )
 
 export const selectIsCategoriesLoading = createSelector(
