@@ -11,7 +11,8 @@ const CartIcon = ()=>{
     const cartCount = useSelector(selectCartCount)
     const dispatch = useDispatch();
 
-    const toggleCartOpen = () => { dispatch(setIsCartOpen(!isCartOpen))}
+    const toggleCartOpen = () => { // @ts-ignore
+        dispatch(setIsCartOpen(!isCartOpen))}
 
     return (
         <CartIconContainer onClick={toggleCartOpen}>

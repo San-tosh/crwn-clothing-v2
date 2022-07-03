@@ -6,8 +6,11 @@ import Spinner from "../spinner/spinner.component";
 import {useSelector} from "react-redux";
 import {selectCategoriesMap, selectIsCategoriesLoading} from "../../features/categories/categories.selector";
 
+export type CategoryRouteParams = {
+    category: string;
+}
 const Category = ()=> {
-    const { category } = useParams();
+    const { category } = useParams<keyof CategoryRouteParams>() as CategoryRouteParams; // we can either get category or any other additional values
     console.log('category render/re-render');
     const categoriesMap = useSelector(selectCategoriesMap); // returns object
     const isLoading = useSelector(selectIsCategoriesLoading); // returns object

@@ -10,7 +10,8 @@ const Shop = () => {
     const dispatch = useDispatch()
     useEffect(()=>{
         console.log('shop component')
-         dispatch(fetchCategoriesStart())
+         // @ts-ignore
+        dispatch(fetchCategoriesStart())
     },[]);
 
     return (

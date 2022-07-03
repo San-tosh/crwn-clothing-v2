@@ -6,14 +6,19 @@ import {useDispatch, useSelector} from "react-redux";
 import {addCartItem} from "../../features/cart/cart.action";
 import {setCartItems} from "../../features/cart/cartSlice";
 import {selectCartItems} from "../../features/cart/cart.selector";
+import {CategoryItem} from "../../features/categories/categories.types";
 
-const ProductCard = ({product})=>{
+export type ProductCardProps = {
+    product: CategoryItem
+}
+const ProductCard = ({product} : ProductCardProps)=>{
     const dispatch = useDispatch();
     const cartItems = useSelector(selectCartItems)
     const {name, price, imageUrl} = product;
 
     const addProductToCart = ()=> {
         const newCartItems = addCartItem(cartItems, product);
+        // @ts-ignore
         dispatch(setCartItems(newCartItems))
     }
 

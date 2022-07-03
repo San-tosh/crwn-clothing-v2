@@ -1,6 +1,11 @@
 import styled from 'styled-components'
+import {ButtonHTMLAttributes} from "react";
 
-export const BaseButton = styled.button `
+export type ButtonProps = {
+    disabled?: boolean
+}
+
+export const BaseButton = styled.button<ButtonProps>`
      min-width: 165px;
      width: auto;
      height: 50px;
